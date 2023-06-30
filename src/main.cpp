@@ -1,28 +1,45 @@
-#include <iostream>
+#define STB_IMAGE_IMPLEMENTATION
+#include "stb/stb_image.h"
+#include <glad/gl.h>
+
 #include <SDL.h>
 #include <SDL_image.h>
 #include <SDL_mixer.h>
 
 #include "Window.h"
 #include "Scene.h"
-#include "Entity.h"
-
-#include "component/PositionComponent.h"
 
 int main(int argc, char* argv[]) {
     SDL_Init(SDL_INIT_VIDEO);
     SDL_Init(IMG_INIT_PNG );
     SDL_Init(SDL_INIT_AUDIO);
+    SDL_GL_LoadLibrary(nullptr);
 
-    std::cout << "Hello, World!" << std::endl;
+    // Request an OpenGL 4.5 context (should be core)
+    SDL_GL_SetAttribute(SDL_GL_ACCELERATED_VISUAL, 1);
+    SDL_GL_SetAttribute(SDL_GL_CONTEXT_MAJOR_VERSION, 4);
+    SDL_GL_SetAttribute(SDL_GL_CONTEXT_MINOR_VERSION, 5);
+
+    Window glWindow = Window("Gl Window", 400, 500, SDL_WINDOW_OPENGL);
+    glWindow.open();
+    glWindow.createGLContext();
+
+    //Load OpenGL function pointers using GLAD
+    int version = gladLoadGL((GLADloadfunc) SDL_GL_GetProcAddress);
+    std::cout<<"Glad loadGL version: "<<version<<std::endl;
+
+    // Check OpenGL properties;
+    std::cout<<"OpenGL loaded\n";
+    std::cout<<"Vendor:    "<<glGetString(GL_VENDOR)<<std::endl;
+    std::cout<<"Renderer:  "<<glGetString(GL_RENDERER)<<std::endl;
+    std::cout<<"Version:   "<<glGetString(GL_VERSION)<<std::endl;
+
 
     Window window = Window("Grav Shift", 1920, 1080, SDL_WINDOW_SHOWN );
     window.open();
     window.createRenderer(640, 360, SDL_RENDERER_ACCELERATED | SDL_RENDERER_PRESENTVSYNC);
 
-
     Scene scene = Scene();
-
 
     SDL_Event event;
     bool running = true;

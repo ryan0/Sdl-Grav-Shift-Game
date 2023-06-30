@@ -21,6 +21,9 @@ public:
     void createRenderer(int logicalWidth, int logicalHeight, Uint32 flags);
     SDL_Renderer* getRendererRef();
 
+    void createGLContext();
+    SDL_GLContext getGLContext();
+
     [[nodiscard]] int getWidth() const;
     [[nodiscard]] int getHeight() const;
 
@@ -29,6 +32,7 @@ public:
 private:
     SDL_Window* windowPtr = nullptr;
     SDL_Renderer* rendererPtr = nullptr;
+    SDL_GLContext glContext = nullptr;
     std::string title;
 
     Uint32 flags = SDL_WINDOW_SHOWN;

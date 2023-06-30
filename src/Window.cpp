@@ -28,18 +28,36 @@ void Window::createRenderer(int logicalWidth, int logicalHeight, Uint32 renderFl
         std::cout<<"Failed to create renderer, associated SDL_Window is null!"<<std::endl;
     } else if (rendererPtr != nullptr) {
         std::cout<<"Failed to create renderer, associated SDL_Renderer already instantiated"<<std::endl;
+    } else if (glContext != nullptr) {
+        std::cout<<"Failed to create renderer, associated Context already instantiated"<<std::endl;
     } else {
-        rendererPtr = SDL_CreateRenderer(windowPtr, -1, flags);
+        rendererPtr = SDL_CreateRenderer(windowPtr, -1, renderFlags);
         SDL_RenderSetLogicalSize(rendererPtr, logicalWidth, logicalHeight);
     }
 }
 
+void Window::createGLContext() {
+    if(windowPtr == nullptr) {
+        std::cout<<"Failed to create context, associated SDL_Window is null!"<<std::endl;
+    } else if (rendererPtr != nullptr) {
+        std::cout<<"Failed to create context, associated SDL_Renderer already instantiated"<<std::endl;
+    } else if (glContext != nullptr) {
+        std::cout<<"Failed to create context, associated Context already instantiated"<<std::endl;
+    } else {
+        glContext = SDL_GL_CreateContext(windowPtr);
+    }
+}
+
 void Window::close() {
-    if(rendererPtr != nullptr) {
+    if (rendererPtr != nullptr) {
         SDL_DestroyRenderer(rendererPtr);
         rendererPtr = nullptr;
     }
-    if(windowPtr != nullptr) {
+    if (glContext != nullptr) {
+        SDL_GL_DeleteContext(glContext);
+        glContext = nullptr;
+    }
+    if (windowPtr != nullptr) {
         SDL_DestroyWindow(windowPtr);
         windowPtr = nullptr;
     }
@@ -47,6 +65,10 @@ void Window::close() {
 
 SDL_Renderer* Window::getRendererRef() {
     return rendererPtr;
+}
+
+SDL_GLContext Window::getGLContext() {
+    return glContext;
 }
 
 int Window::getWidth() const {
