@@ -10,6 +10,7 @@
 #include "Entity.h"
 
 #include "system/GeometricRenderSystem.h"
+#include "system/GLRectRenderSystem.h"
 #include "system/VelocitySystem.h"
 
 class Scene {
@@ -26,8 +27,8 @@ public:
 
 private:
     std::vector<std::shared_ptr<Entity>> entities;
-    GeometricRenderSystem geometricRenderSystem;
     VelocitySystem velocitySystem;
+    GLRectRenderSystem glRectRenderSystem;
 };
 
 

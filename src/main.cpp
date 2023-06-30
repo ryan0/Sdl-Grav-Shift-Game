@@ -34,11 +34,6 @@ int main(int argc, char* argv[]) {
     std::cout<<"Renderer:  "<<glGetString(GL_RENDERER)<<std::endl;
     std::cout<<"Version:   "<<glGetString(GL_VERSION)<<std::endl;
 
-
-    Window window = Window("Grav Shift", 1920, 1080, SDL_WINDOW_SHOWN );
-    window.open();
-    window.createRenderer(640, 360, SDL_RENDERER_ACCELERATED | SDL_RENDERER_PRESENTVSYNC);
-
     Scene scene = Scene();
 
     SDL_Event event;
@@ -51,7 +46,8 @@ int main(int argc, char* argv[]) {
         }
 
         scene.update();
-        scene.render(window.getRendererRef());
+        scene.render(nullptr);
+        glWindow.glSwapWindow();
     }
 
     Mix_Quit();

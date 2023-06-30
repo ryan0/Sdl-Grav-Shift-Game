@@ -48,6 +48,10 @@ void Window::createGLContext() {
     }
 }
 
+void Window::glSwapWindow() {
+    SDL_GL_SwapWindow(windowPtr);
+}
+
 void Window::close() {
     if (rendererPtr != nullptr) {
         SDL_DestroyRenderer(rendererPtr);

@@ -24,6 +24,8 @@ public:
     void createGLContext();
     SDL_GLContext getGLContext();
 
+    void glSwapWindow();
+
     [[nodiscard]] int getWidth() const;
     [[nodiscard]] int getHeight() const;
 

@@ -5,7 +5,7 @@ set(CMAKE_CXX_STANDARD 17)
 
 include_directories(${PROJECT_SOURCE_DIR}/third-party/include)
 
-add_executable(SDL_Grav_Shift_Game src/main.cpp src/Window.cpp src/Window.h src/SceneManager.cpp src/SceneManager.h src/Scene.cpp src/Scene.h src/Entity.cpp src/Entity.h src/math/Vec2f.cpp src/math/Vec2f.h src/component/PositionComponent.h src/component/VelocityComponent.h src/component/RectGeometryGraphicComponent.h src/component/Component.h src/component/Component.cpp src/system/GeometricRenderSystem.cpp src/system/GeometricRenderSystem.h src/system/System.cpp src/system/System.h src/system/VelocitySystem.cpp src/system/VelocitySystem.h third-party/include/stb/stb_image.h third-party/src/gl.c)
+add_executable(SDL_Grav_Shift_Game src/main.cpp src/Window.cpp src/Window.h src/SceneManager.cpp src/SceneManager.h src/Scene.cpp src/Scene.h src/Entity.cpp src/Entity.h src/math/Vec2f.cpp src/math/Vec2f.h src/component/PositionComponent.h src/component/VelocityComponent.h src/component/RectGeometryGraphicComponent.h src/component/Component.h src/component/Component.cpp src/system/GeometricRenderSystem.cpp src/system/GeometricRenderSystem.h src/system/System.cpp src/system/System.h src/system/VelocitySystem.cpp src/system/VelocitySystem.h third-party/include/stb/stb_image.h third-party/src/gl.c src/rendering/Texture.cpp src/rendering/Texture.h src/rendering/VertexArray.cpp src/rendering/VertexArray.h src/rendering/ShaderProgram.cpp src/rendering/ShaderProgram.h src/system/GLRectRenderSystem.cpp src/system/GLRectRenderSystem.h)
 
 find_package(SDL2 CONFIG REQUIRED)
 find_package(SDL2_image CONFIG REQUIRED)

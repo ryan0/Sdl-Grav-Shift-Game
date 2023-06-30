@@ -17,11 +17,7 @@ Scene::Scene() {
     auto velocityComponent = std::make_unique<VelocityComponent>(0.05f, 0.4f);
     e->addComponent<VelocityComponent>(std::move(velocityComponent));
 
-    auto rectGeometry = std::make_unique<RectGeometryGraphicComponent>(0.0, 0.0f, 20.0f, 20.0f);
-    e->addComponent<RectGeometryGraphicComponent>(std::move(rectGeometry));
-
     velocitySystem.registerEntity(e);
-    geometricRenderSystem.registerEntity(e);
     addEntity(e);
 }
 
@@ -30,12 +26,10 @@ void Scene::update() {
 }
 
 void Scene::render(SDL_Renderer *renderer) {
-    SDL_SetRenderDrawColor(renderer, 0, 0, 0, 0);
-    SDL_RenderClear(renderer);
+    glClearColor(0.0f, 0.35f, 0.5f, 1.0f);
+    glClear(GL_COLOR_BUFFER_BIT);
 
-    geometricRenderSystem.render(renderer);
-
-    SDL_RenderPresent(renderer);
+    glRectRenderSystem.render();
 }
 
 void Scene::handleEvent(const SDL_Event &event) {
